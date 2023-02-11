@@ -22,10 +22,10 @@ export const CurrentBankomat = (props: CurrentBankomatPropsType) => {
             </BanknoteBlue>
 */
 
-                <BanknoteGreen color={props.money.banknotes ==='Dollars' ? 'forestgreen': 'dodgerblue'}>
+                <BanknoteUniversal color={props.money.banknotes ==='Dollars' ? 'forestgreen': 'dodgerblue'}>
                         <Name>{props.money.banknotes}</Name>
                         <Nominal>{props.money.value}</Nominal>
-                   </BanknoteGreen>
+                   </BanknoteUniversal>
 
 
 
@@ -39,13 +39,13 @@ const BanknoteUniversal = styled.div`
     } else {
       return 'dodgerblue'
     }
-  }}
+  }};
   width: 400px;
   height: 200px;
   margin: 10px;
 `
 
-const BanknoteGreen = styled.div`
+/*const BanknoteGreen = styled.div`
   background-color: forestgreen;
   width: 400px;
   height: 200px;
@@ -57,7 +57,7 @@ const BanknoteBlue = styled.div`
   width: 400px;
   height: 200px;
   margin: 10px;
-`
+`*/
 
 const Name = styled.div`
   display: flex;
