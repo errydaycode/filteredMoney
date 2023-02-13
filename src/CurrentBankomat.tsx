@@ -4,70 +4,46 @@ import styled from "styled-components";
 
 type CurrentBankomatPropsType = {
     money: MoneyType
+    deleteBanknote: (banknoteID: string)=> void
 }
-export const CurrentBankomat = (props: CurrentBankomatPropsType) => {
+export const CurrentBankomat = (props:CurrentBankomatPropsType) => {
 
     return (
-/*
+        <div>
+            {props.money.banknotes === 'Dollars' ?
+                <BanknoteGreen>{props.money.banknotes}
+                <Value>{props.money.value}</Value>
+                    <button onClick={()=> props.deleteBanknote(props.money.number)}>Потратил</button>
+                </BanknoteGreen>
 
-        props.money.banknotes === 'Dollars'
-            ? <BanknoteGreen>
-                <Name>{props.money.banknotes}</Name>
-                <Nominal>{props.money.value}</Nominal>
-            </BanknoteGreen>
+                : <BanknoteBlue>{props.money.banknotes}
+                    <Value>{props.money.value}</Value>
+                    <button onClick={()=> props.deleteBanknote(props.money.number)}>Потратил</button>
+                </BanknoteBlue>
+            }
 
-            : <BanknoteBlue>
-                <Name>{props.money.banknotes}</Name>
-                <Nominal>{props.money.value}</Nominal>
-            </BanknoteBlue>
-*/
-
-                <BanknoteUniversal color={props.money.banknotes ==='Dollars' ? 'forestgreen': 'dodgerblue'}>
-                        <Name>{props.money.banknotes}</Name>
-                        <Nominal>{props.money.value}</Nominal>
-                   </BanknoteUniversal>
-
-
-
+        </div>
     );
 };
 
-const BanknoteUniversal = styled.div`
-  background-color: ${props => {
-    if (props.color === 'forestgreen') {
-      return 'forestgreen'
-    } else {
-      return 'dodgerblue'
-    }
-  }};
+
+
+const BanknoteGreen = styled.div`
+  background-color: #61dafb;
+  margin: 10px;
   width: 400px;
   height: 200px;
-  margin: 10px;
-`
 
-/*const BanknoteGreen = styled.div`
-  background-color: forestgreen;
-  width: 400px;
-  height: 200px;
-  margin: 10px;
-`
-
+`;
 const BanknoteBlue = styled.div`
-  background-color: dodgerblue;
-  width: 400px;
-  height: 200px;
-  margin: 10px;
-`*/
-
-const Name = styled.div`
-  display: flex;
-  justify-content: center;
-  font-size: 30px;
+    
+    background-color: forestgreen;
+    margin: 10px;
+    width: 400px;
+    height: 200px;
+    
 `
-
-const Nominal = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  font-size: 50px;
+const Value = styled.div`
+    
+ 
 `

@@ -4,34 +4,38 @@ import {MoneyType} from "./App";
 import styled from "styled-components";
 
 type CityPropsType = {
-    data: MoneyType[] //встречаем денюжки
+    data: MoneyType[]
+    deleteBanknote: (banknoteID: string )=> void
 }
 
 export const City = (props: CityPropsType) => {
 
-
+    // пока это пропускам
     const mappedMoney = props.data.map((el: MoneyType, index) => (
         <CurrentBankomat
             key={index}
             money={el}
+            deleteBanknote={props.deleteBanknote}
         />
     ))
 
-  /*  const mappedMoney = props.data.map((el) => {
+
+   /* const mappedMoney = props.data.map((t)=>{
         return (
             <div>
-                <span>{el.banknotes}</span>
-                <span>{el.number}</span>
-                <span>{el.value}</span>
+                <span>{t.banknotes}</span>
+                <span>{t.value}</span>
+                <span>{t.number}</span>
             </div>
         )
     })*/
 
     return (
-        <Wrapper>{mappedMoney}</Wrapper>
+        <Wrapper>
+            {mappedMoney}
+        </Wrapper>
     );
 };
-
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,6 +55,7 @@ const Wrapper = styled.div`
 // Ну и наконец давайте версточку натянем, для этого будем использовать StyledComponents
 // yarn add styled-components
 // yarn add @types/styled-components
+
 
 //3
 // Вроде все норм, ну точнее почти норм- дублирование-это грех. Хотелось бы от него избавиться.

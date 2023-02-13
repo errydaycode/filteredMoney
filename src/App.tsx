@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Country} from "./Country";
 
-export type BanknotsType = 'Dollars' | 'RUBLS' | 'All' // создадим типы для banknotes -он может быть 'Dollars', 'RUBLS'  'All'
+export type BanknotsType = 'All' | 'Dollars' | 'RUBLS' // создадим типы для banknotes -он может быть 'Dollars', 'RUBLS' или 'All'
 export type MoneyType = {
     banknotes: BanknotsType
     value: number// не ленимся, убираем заглушку, и пишем правильный тип)
@@ -23,26 +23,32 @@ let defaultMoney: MoneyType[] = [  // типизируем
 // типизируем на входе и выходе
 export const moneyFilter = (money: MoneyType[], filterValue: BanknotsType): MoneyType[] => {
     if(filterValue === 'All') return money
-    return money.filter(t => t.banknotes === filterValue)
-
+    return money.filter(t=> t.banknotes === filterValue)
     //если пришел filter со значением 'All', то возвращаем все банкноты
     //return money.filter... ну да, придется фильтровать
 }
 
+
+
 function App() {
     // убираем заглушки в типизации и вставляем в качестве инициализационного значения defaultMoney
-    const [money, setMoney] = useState<any>(defaultMoney)
-    const [filterValue, setFilterValue] = useState<any>('All')   // по умолчанию указываем все банкноты
+    const [money, setMoney] = useState<MoneyType[]>(defaultMoney)
+    const [filterValue, setFilterValue] = useState<BanknotsType>('All')   // по умолчанию указываем все банкноты
 
     // а вот сейчас притормаживаем. И вдумчиво: константа filteredMoney получает результат функции moneyFilter
     // в функцию передаем деньги и фильтр, по которому ихбудем выдавать(ретёрнуть)
     const filteredMoney = moneyFilter(money, filterValue)
-    console.log(filteredMoney)
+     const deleteBanknote = (banknoteID: string) => {
+       const proebal = money.filter(t=> t.number !== banknoteID)
+         setMoney(proebal)
+
+    }
     return (
         <div className="App">
             <Country
                 data={filteredMoney}   //отрисовать будем деньги после фильтрации
-                setFilterValue={setFilterValue}  //useState передаем? Так можно было?!
+                setFilterValue={setFilterValue}
+                deleteBanknote={deleteBanknote}//useState передаем? Так можно было?!
 
             />
         </div>
